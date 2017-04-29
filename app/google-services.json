@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "738708845137",
+    "firebase_url": "https://barangku-5301d.firebaseio.com",
+    "project_id": "barangku-5301d",
+    "storage_bucket": "barangku-5301d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738708845137:android:ecf4f59ef8a3daf9",
+        "android_client_info": {
+          "package_name": "com.natsirasrafi.barangku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738708845137-aommouuvlqsapjjehsdv9mudeo7p51cj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.natsirasrafi.barangku",
+            "certificate_hash": "e88f101555efcc0780f9b42201e6bd7a3d89737a"
+          }
+        },
+        {
+          "client_id": "738708845137-dm7du1nten15nl6j4ifn6f6q57o492tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtQiK_Ig181eyYOUcTMXJIrXDzUD4CdqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738708845137-dm7du1nten15nl6j4ifn6f6q57o492tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
