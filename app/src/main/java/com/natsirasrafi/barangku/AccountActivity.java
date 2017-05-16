@@ -24,8 +24,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import static android.R.id.message;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -63,12 +66,8 @@ public class AccountActivity extends AppCompatActivity {
         accountPhoneET = (EditText) findViewById(R.id.accountPhone);
         accountAddresET = (EditText) findViewById(R.id.accountAddress);
 
-
         accountButtonOk = (Button) findViewById(R.id.accountOkButton);
         mLogOutButton = (Button) findViewById(R.id.buttonLogOut);
-
-
-
         mStorageImage = FirebaseStorage.getInstance().getReference();
 
         mDatabaseUser.addValueEventListener(new ValueEventListener() {
@@ -79,6 +78,8 @@ public class AccountActivity extends AppCompatActivity {
                 accountEmailET.setText(dataSnapshot.child("email").getValue(String.class));
                 accountAddresET.setText(dataSnapshot.child("address").getValue(String.class));
                 accountPhoneET.setText(dataSnapshot.child("phone").getValue(String.class));
+
+                Picasso.with(AccountActivity.this).load(dataSnapshot.child("image").getValue(String.class)).fit().centerCrop().into(avatarImage);
 
 
             }
@@ -149,13 +150,14 @@ public class AccountActivity extends AppCompatActivity {
 
 
     private void startAccountSettup(){
+
         final String name = accountNameET.getText().toString().trim();
         final String email = accountEmailET.getText().toString().trim();
         final String phone = accountPhoneET.getText().toString().trim();
         final String address = accountAddresET.getText().toString().trim();
         final String user_id = mAuth.getCurrentUser().getUid();
 
-        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) ){
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email)  ){
             mProgress.setMessage("Setting Up Account....");
             mProgress.show();
 
@@ -176,6 +178,7 @@ public class AccountActivity extends AppCompatActivity {
 
                     mProgress.dismiss();
                     goToCategory();
+
                 }
             });
 
@@ -201,16 +204,16 @@ public class AccountActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
             mImageUri = data.getData();
             avatarImage.setImageURI(mImageUri);
         }
-    }*/
+    }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
          if(requestCode == GALLERY_REQUEST && resultCode ==  RESULT_OK){
 
@@ -231,20 +234,7 @@ public class AccountActivity extends AppCompatActivity {
                 Exception error = result.getError();
             }
         }
-    }
+    }*/
 
-    public void updateAccountData(){
-
-
-        DatabaseReference getData = mDatabase;
-
-        if (getData.child("nama").getKey() != ""){
-
-                goToCategory();
-        }else {
-
-        }
-
-    }
 
 }
