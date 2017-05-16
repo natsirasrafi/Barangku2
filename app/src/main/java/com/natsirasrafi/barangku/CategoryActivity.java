@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -76,9 +77,17 @@ public class CategoryActivity extends AppCompatActivity {
 
             @Override
             protected void populateViewHolder(ItemCategoryViewHolder viewHolder, ItemCategory model, int position) {
+                final String post_key = getRef(position).getKey();
                 viewHolder.setName(model.getName());
                 viewHolder.setDescription(model.getDescription());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(CategoryActivity.this,post_key,Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         };

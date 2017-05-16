@@ -52,13 +52,15 @@ public class AddCategory extends Activity {
 
 
         mAuth = FirebaseAuth.getInstance();
-
+        mCurrentUser= mAuth.getCurrentUser();
+        mStorage = FirebaseStorage.getInstance().getReference( );
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("barangku");
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("User").child(mCurrentUser.getUid());
         mPostDescCategory = (EditText)findViewById(R.id.etAddDescCategory);
         mPostNameCategory = (EditText)findViewById(R.id.etAddNameCategory);
         mSelectImage = (ImageButton) findViewById(R.id.imageButtonSelect);
         mBtnSubmitCategory = (Button) findViewById(R.id.btnSubmtiAddCategory);
-        mStorage = FirebaseStorage.getInstance().getReference( );
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("barangku");
+
        // StorageReference filePath = mStorage.getReferenceFromUrl("gs://barangku-5301d.appspot.com");
 
         mProgress = new ProgressDialog(this);
@@ -108,30 +110,30 @@ public class AddCategory extends Activity {
                     final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     final DatabaseReference newPost = mDatabase.push();
 
-                    newPost.child("name").setValue(strNameAddCategory);
+                    /*newPost.child("name").setValue(strNameAddCategory);
                     newPost.child("description").setValue(strDescAddCategory);
                     newPost.child("image").setValue(downloadUrl.toString());
+*/
 
-
-                   /* mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                   mDatabaseUser.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             newPost.child("name").setValue(strNameAddCategory);
                             newPost.child("description").setValue(strDescAddCategory);
                             newPost.child("image").setValue(downloadUrl.toString());
                             newPost.child("uid").setValue(mCurrentUser.getUid());
-                            newPost.child("username").setValue(dataSnapshot.child("name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            newPost.child("username").setValue(dataSnapshot.child("name").getValue(String.class)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
                                     if(task.isSuccessful()){
-
+                                        Intent backCategoryIntent = new Intent(AddCategory.this, CategoryActivity.class);
+                                        startActivity(backCategoryIntent);
                                     }else {
 
                                     }
                                     //startActivity(new Intent(AddCategory.this, CategoryActivity.class));
-                                    Intent backCategoryIntent = new Intent(AddCategory.this, CategoryActivity.class);
-                                    startActivity(backCategoryIntent);
+
                                 }
                             });
                         }
@@ -140,14 +142,14 @@ public class AddCategory extends Activity {
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    });*/
+                    });
 
 
 
 
                     mProgress.dismiss();
-                    Intent backCategoryIntent = new Intent(AddCategory.this, CategoryActivity.class);
-                    startActivity(backCategoryIntent);
+                    //Intent backCategoryIntent = new Intent(AddCategory.this, CategoryActivity.class);
+                    //startActivity(backCategoryIntent);
 
                 }
             });
