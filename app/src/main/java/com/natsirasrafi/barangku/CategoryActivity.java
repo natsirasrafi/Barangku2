@@ -1,6 +1,7 @@
 package com.natsirasrafi.barangku;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -30,12 +31,14 @@ public class CategoryActivity extends AppCompatActivity {
     private StorageReference mStorage;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        mProgress = new ProgressDialog(this);
 
         mCategoryList = (RecyclerView) findViewById(R.id.categoryRecylerView);
         mCategoryList.setHasFixedSize(true);

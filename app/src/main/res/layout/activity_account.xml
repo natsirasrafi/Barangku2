@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.natsirasrafi.barangku.AccountActivity">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/avatar"
         android:layout_width="154dp"
         android:layout_height="148dp"
@@ -15,10 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="@dimen/z_card"
-        android:padding="@dimen/avatar_padding"
-        android:src="@drawable/avatar_placeholder"
-        tools:layout_editor_absoluteX="115dp" />
+        tools:layout_editor_absoluteX="115dp"
+        android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/textView"
         android:layout_width="154dp"
